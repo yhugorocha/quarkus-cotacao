@@ -4,6 +4,8 @@ import io.github.yhugorocha.service.QuotationService;
 import io.quarkus.scheduler.Scheduled;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +17,12 @@ public class QuotationScheduler {
 
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-    @Scheduled(every = "35s", identity = "task-job")
+    @ConfigProperty(name = "quarkus.message", defaultValue = "Buscando cotacao")
+    private String message;
+
+    @Scheduled(every = "30s", identity = "task-job")
     void getQuotation(){
-        LOG.info("-- Buscando cotacao --");
+        LOG.info("-- "+message+" --");
         quotationService.getCurrencyPrice();
     }
 }

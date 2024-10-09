@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuotationDTO {
-
+    private static final long serialVersionUID = 1L;
     private LocalDateTime date;
     private BigDecimal currencyPrice;
 }
